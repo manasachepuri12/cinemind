@@ -75,4 +75,46 @@ public String getRecommendations(Long movieId) {
 
     return restTemplate.getForObject(url, String.class);
 }
+public String getSmartRecommendations(int movieId) {
+
+    String detailsUrl =
+            "https://api.themoviedb.org/3/movie/"
+                    + movieId
+                    + "?api_key="
+                    + apiKey;
+
+    String movieDetails =
+            restTemplate.getForObject(detailsUrl, String.class);
+
+    try {
+
+        com.fasterxml.jackson.databind.ObjectMapper mapper =
+                new com.fasterxml.jackson.databind.ObjectMapper();
+
+        com.fasterxml.jackson.databind.JsonNode root =
+                mapper.readTree(movieDetails);
+
+        int genreId =
+                root.get("genres").get(0).get("id").asInt();
+
+        String language =
+                root.get("original_language").asText();
+
+        String recommendationUrl =
+                "https://api.themoviedb.org/3/discover/movie"
+                        + "?api_key=" + apiKey
+                        + "&with_genres=" + genreId
+                        + "&with_original_language=" + language
+                        + "&vote_average.gte=7"
+                        + "&sort_by=vote_average.desc";
+
+        return restTemplate.getForObject(
+                recommendationUrl,
+                String.class
+        );
+
+    } catch (Exception e) {
+        return "{\"results\":[]}";
+    }
+}
 }

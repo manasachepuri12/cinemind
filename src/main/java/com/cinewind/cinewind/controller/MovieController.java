@@ -36,8 +36,10 @@ public String movieDetails(@PathVariable Long id) {
 public String getTrailers(@PathVariable Long id) {
     return movieService.getMovieTrailers(id);
 }
-@GetMapping("/{id}/recommendations")
-public String recommendations(@PathVariable Long id) {
-    return movieService.getRecommendations(id);
+@GetMapping("/{id}/smart-recommendations")
+public String getSmartRecommendations(
+        @PathVariable int id) {
+
+    return movieService.getSmartRecommendations(id);
 }
 }
