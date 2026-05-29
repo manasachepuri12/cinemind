@@ -94,9 +94,8 @@ public String getSmartRecommendations(int movieId) {
         com.fasterxml.jackson.databind.JsonNode root =
                 mapper.readTree(movieDetails);
 
-        if (root.get("genres").size() == 0) {
-    return "{\"results\":[]}";
-}
+        int genreId =
+                root.get("genres").get(0).get("id").asInt();
 
         String language =
                 root.get("original_language").asText();
