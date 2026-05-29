@@ -32,4 +32,12 @@ public class MovieController {
 public String movieDetails(@PathVariable Long id) {
     return movieService.getMovieDetails(id);
 }
+@GetMapping("/{id}/trailers")
+public String getTrailers(@PathVariable Long id) {
+    return movieService.getMovieTrailers(id);
+}
+@GetMapping("/{id}/recommendations")
+public String recommendations(@PathVariable Long id) {
+    return movieService.getRecommendations(id);
+}
 }
