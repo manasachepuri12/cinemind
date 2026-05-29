@@ -28,4 +28,8 @@ public class MovieController {
     public String test() {
         return "Backend Working!";
     }
+    @GetMapping("/{id}")
+public String movieDetails(@PathVariable Long id) {
+    return movieService.getMovieDetails(id);
+}
 }

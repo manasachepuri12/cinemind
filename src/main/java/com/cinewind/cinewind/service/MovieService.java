@@ -7,7 +7,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class MovieService {
 
-   @Value("${tmdb.api.key}")
+   @Value("${TMDB_API_KEY}")
 private String apiKey;
 
     private final RestTemplate restTemplate = new RestTemplate();
@@ -39,5 +39,15 @@ public String searchMovies(String query) {
 } catch (Exception e) {
     return "TMDB Error: " + e.getMessage();
 }
+}
+public String getMovieDetails(Long movieId) {
+
+    String url =
+            "https://api.themoviedb.org/3/movie/"
+                    + movieId
+                    + "?api_key="
+                    + apiKey;
+
+    return restTemplate.getForObject(url, String.class);
 }
 }
