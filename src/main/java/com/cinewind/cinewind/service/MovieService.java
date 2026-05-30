@@ -100,15 +100,17 @@ public String getSmartRecommendations(int movieId) {
         String language =
                 root.get("original_language").asText();
 
-        String recommendationUrl =
+       String recommendationUrl =
     "https://api.themoviedb.org/3/movie/"
     + movieId
-    + "/similar?api_key="
+    + "/recommendations"
+    + "?api_key="
     + apiKey;
-        return restTemplate.getForObject(
-                recommendationUrl,
-                String.class
-        );
+
+return restTemplate.getForObject(
+    recommendationUrl,
+    String.class
+);
 
     } catch (Exception e) {
         return "{\"results\":[]}";
