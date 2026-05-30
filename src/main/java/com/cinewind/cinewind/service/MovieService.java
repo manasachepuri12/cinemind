@@ -101,13 +101,10 @@ public String getSmartRecommendations(int movieId) {
                 root.get("original_language").asText();
 
         String recommendationUrl =
-                "https://api.themoviedb.org/3/discover/movie"
-                        + "?api_key=" + apiKey
-                        + "&with_genres=" + genreId
-                        + "&with_original_language=" + language
-                        + "&vote_average.gte=7"
-                        + "&sort_by=vote_average.desc";
-
+    "https://api.themoviedb.org/3/movie/"
+    + movieId
+    + "/similar?api_key="
+    + apiKey;
         return restTemplate.getForObject(
                 recommendationUrl,
                 String.class
