@@ -105,7 +105,6 @@ public String getSmartRecommendations(int movieId) {
         + "?api_key=" + apiKey
         + "&with_genres=" + genreId
         + "&with_original_language=" + language
-        + "&vote_count.gte=100"
         + "&sort_by=popularity.desc";
 
 return restTemplate.getForObject(
